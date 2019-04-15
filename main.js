@@ -28,6 +28,25 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+
+  setInterval(() => {
+    const testWindow = new BrowserWindow({
+      width: 380,
+      height: 100,
+      alwaysOnTop: true,
+      skipTaskbar: false,
+      resizable: false,
+      show: true,
+      frame: false,
+      transparent: true,
+      acceptFirstMouse: true,
+      webPreferences: {
+        sandbox: true,
+        nodeIntegration: false,
+        devTools: true,
+      },
+    });
+  }, 1000);
 }
 
 // This method will be called when Electron has finished
