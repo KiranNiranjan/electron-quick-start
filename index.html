@@ -9,8 +9,16 @@
     We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.
+    <button id='open-win'>open window</button>
 
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
+  <script>
+    let win;
+    const openWinButton = document.getElementById('open-win');
+    openWinButton.addEventListener('click', () => {
+      win = window.open('win.html?x=100&y=100', 'test-window', 'height=600,width=500');
+    });
+  </script>
   </body>
 </html>

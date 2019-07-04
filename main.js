@@ -12,15 +12,18 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      sandbox: true,
+      nodeIntegration: false,
     }
-  })
+  });
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html');
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -28,7 +31,11 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
-  })
+  });
+
+  mainWindow.webContents.on('new-window', (event, newWinUrl, frameName, disposition, newWinOptions) => {
+    console.log(event, newWinUrl, frameName, disposition, newWinOptions);
+  });
 }
 
 // This method will be called when Electron has finished
